@@ -14,7 +14,7 @@ const deploy = async () => {
 
     const result = await new web3.eth.Contract(compiledAppetito.abi)
       .deploy({ data: '0x' + compiledAppetito.evm.bytecode.object })
-      .send({ gas: '1000000', gasPrice: '5000000000', from: accounts[0] });
+      .send({ gas: '5000000', gasPrice: '5000000000', from: accounts[0] });
 
     console.log('Contract account deployed to', result.options.address);
   } catch (error) {
@@ -24,3 +24,4 @@ const deploy = async () => {
 
 deploy();
 // 1st deployed contract address: 0x612738ec3d984c2801570a38761515B6B6A78f2d
+// 2nd deployed contract address: 0x5e2960655Ab5bE255c5E63A3F81Bb8700b62C156

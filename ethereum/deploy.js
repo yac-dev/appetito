@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ path: '../config/dev.env' });
 const HDWalletProvider = require('truffle-hdwallet-provider');
 const Web3 = require('web3');
 const compiledAppetito = require('./build/Appetito.json');
@@ -23,3 +23,4 @@ const deploy = async () => {
 };
 
 deploy();
+// 1st deployed contract address: 0x612738ec3d984c2801570a38761515B6B6A78f2d

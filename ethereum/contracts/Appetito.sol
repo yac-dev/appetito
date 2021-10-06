@@ -9,57 +9,78 @@ contract Appetito {
     string description;
     uint value;
     address claimer;
-    address to;
+    address recipient;
     bool done;
     mapping(address => bool) approvers;
     uint approvedCounts;
   }
 
-  address public owner;
-  mapping(address => bool) public contributors;
-  uint public population;
-  // RequestType[] public requests;
+  struct ContibutorType {
+    string nickName;
+    address place;
+    uint latitude;
+    uint longitude;
+  }
 
-  uint public requestIndex;
-  mapping(uint => ClaimType) public claims; // not array
+  ClaimType public claiming;
+
+  address public owner;
+  // mapping(address => bool) public contributors;
+  ContibutorType[] public contributors;
+  uint public population;
+  ClaimType[] public claims;
 
   constructor(){
     owner = msg.sender;
-  }
-
-  function contribute() public payable {
-    require(msg.value >= 1);
-    contributors[msg.sender] = true;
     population++;
   }
 
-  function claim(string memory dreamJob, string memory purpose, string memory description, uint value, address to) public {
-    // RequestType storage newRequest = RequestType({
-    //     dreamJob: dreamJob,
-    //     purpose: purpose,
-    //     description: description,
-    //     value: value,
-    //     recipient: recipient,
-    //     done: false,
-    //     approvedCount: 0
-    // });
-    ClaimType storage newClaim = claims[requestIndex];
-    requestIndex++;
-    newClaim.dreamJob = dreamJob;
-    newClaim.purpose = purpose;
-    newClaim.description = description;
-    newClaim.value = value;
-    newClaim.claimer = msg.sender;
-    newClaim.to = to;
-    newClaim.done = false;
-    newClaim.approvedCounts = 0;
+  function contribute(string memory nickName, uint latitude, uint longitude) public payable {
+    require(msg.value >= 1);
+    // contributors[msg.sender] = true;
+    ContibutorType memory contributor = ContibutorType({
+      nickName: nickName,
+      place: msg.sender,
+      latitude: latitude,
+      longitude: longitude
+    });
+
+    contributors.push(contributor);
+    population++;
+  }
+
+  function getContributors() public view returns(ContibutorType[] memory){
+    return contributors;
+  }
+
+  function getContributorsNum() public view returns(uint){
+    return contributors.length;
+  }
+
+  // function getClaims() public view returns(ClaimType[] memory){
+  //     return claims; // mapping含んだtypeを返すことはできないか。。。。
+  // }
+
+  function claim(string memory dreamJob, string memory purpose, string memory description, uint value, address recipient) public {
+    uint index = claims.length;
+    claims.push();
+
+    ClaimType storage claim = claims[index];
+    claim.dreamJob = dreamJob;
+    claim.purpose = purpose;
+    claim.description = description;
+    claim.value = value;
+    claim.claimer = msg.sender;
+    claim.recipient = recipient;
+    claim.done = false;
+    claim.approvedCounts = 0;
 
     population++;
   }
 
   function approveClaim(uint index) public {
     require(!claims[index].approvers[msg.sender]);
-    claims[index].approvers[msg.sender];
+    claims[index].approvers[msg.sender] = true;
     claims[index].approvedCounts++;
   }
 
@@ -68,6 +89,6 @@ contract Appetito {
     require(claims[index].approvedCounts > (population / 2));
     require(!claims[index].done);
 
-    payable (claims[index].to).transfer(claims[index].value);
+    payable (claims[index].recipient).transfer(claims[index].value);
   }
 }

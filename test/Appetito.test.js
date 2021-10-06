@@ -15,7 +15,7 @@ beforeEach(async () => {
     .deploy({
       data: compiledAppetito.evm.bytecode.object,
     })
-    .send({ from: accounts[0], gas: '1000000' });
+    .send({ from: accounts[0], gas: '5000000' });
 });
 
 describe('Appetito test!', () => {

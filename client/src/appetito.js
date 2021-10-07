@@ -182,7 +182,7 @@ const abi = [
   },
 ];
 
-const address = '0xa8E565e0FC9eeA5f06c1dDD54a8e4476101006a7';
+const address = '0xedA47Bb14473820Deaa20c15d2Caa57c7a73e08D';
 
 export default new web3.eth.Contract(abi, address);
 // export default appetitoInstanceCopy;

@@ -1,6 +1,11 @@
 import React from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
+import { Link } from 'react-router-dom';
 
+import dotenv from 'dotenv';
+dotenv.config('../.env');
+
+// mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 mapboxgl.accessToken = 'pk.eyJ1IjoieWFiYmVlIiwiYSI6ImNrdWdmZzQ2cDFucjEycm10OTkzOWxsZW0ifQ.IIgIM6uIqBoQQYMpRQKGhQ';
 
 class Map extends React.PureComponent {
@@ -11,6 +16,7 @@ class Map extends React.PureComponent {
       lat: 42.35,
       zoom: 12,
     };
+
     this.mapContainer = React.createRef();
   }
 
@@ -20,7 +26,7 @@ class Map extends React.PureComponent {
       container: this.mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [lng, lat],
-      zoom: zoom,
+      zoom: 1,
     });
 
     map.on('move', () => {
@@ -36,6 +42,7 @@ class Map extends React.PureComponent {
     const { lng, lat, zoom } = this.state;
     return (
       <div>
+        <Link to='/ether/contribute'>You wanna contibute?</Link>
         <div ref={this.mapContainer} className='map-container' />
       </div>
     );

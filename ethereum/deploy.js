@@ -16,6 +16,7 @@ const deploy = async () => {
       .deploy({ data: '0x' + compiledAppetito.evm.bytecode.object })
       .send({ gas: '5000000', gasPrice: '5000000000', from: accounts[0] });
 
+    console.dir(compiledAppetito.abi, { depth: null });
     console.log('Contract account deployed to', result.options.address);
   } catch (error) {
     console.log(error);
@@ -25,3 +26,5 @@ const deploy = async () => {
 deploy();
 // 1st deployed contract address: 0x612738ec3d984c2801570a38761515B6B6A78f2d
 // 2nd deployed contract address: 0x5e2960655Ab5bE255c5E63A3F81Bb8700b62C156
+// 0x5f0202cD9A2f439fbe13932186EA0595a4F32abA
+// 4th 0xa8E565e0FC9eeA5f06c1dDD54a8e4476101006a7

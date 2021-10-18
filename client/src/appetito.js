@@ -1,4 +1,6 @@
 import web3 from './web3';
+// import deployedInfo from '../../ethereum/deploy';
+// import Dashboard from 'app-b-dashboard/container';
 
 const abi = [
   {
@@ -21,11 +23,17 @@ const abi = [
   },
   {
     inputs: [
+      { internalType: 'string', name: 'claimerName', type: 'string' },
       { internalType: 'string', name: 'dreamJob', type: 'string' },
+      { internalType: 'string', name: 'materialTitle', type: 'string' },
+      { internalType: 'string', name: 'urlSource', type: 'string' },
       { internalType: 'string', name: 'purpose', type: 'string' },
-      { internalType: 'string', name: 'description', type: 'string' },
       { internalType: 'uint256', name: 'value', type: 'uint256' },
-      { internalType: 'address', name: 'recipient', type: 'address' },
+      {
+        internalType: 'address',
+        name: 'recipientAddress',
+        type: 'address',
+      },
     ],
     name: 'claim',
     outputs: [],
@@ -33,41 +41,28 @@ const abi = [
     type: 'function',
     constant: undefined,
     payable: undefined,
-    signature: '0xec729859',
-  },
-  {
-    inputs: [],
-    name: 'claiming',
-    outputs: [
-      { internalType: 'string', name: 'dreamJob', type: 'string' },
-      { internalType: 'string', name: 'purpose', type: 'string' },
-      { internalType: 'string', name: 'description', type: 'string' },
-      { internalType: 'uint256', name: 'value', type: 'uint256' },
-      { internalType: 'address', name: 'claimer', type: 'address' },
-      { internalType: 'address', name: 'recipient', type: 'address' },
-      { internalType: 'bool', name: 'done', type: 'bool' },
-      {
-        internalType: 'uint256',
-        name: 'approvedCounts',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
-    payable: undefined,
-    signature: '0x0defc08a',
+    signature: '0x9efb693b',
   },
   {
     inputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
     name: 'claims',
     outputs: [
+      { internalType: 'string', name: 'claimerName', type: 'string' },
       { internalType: 'string', name: 'dreamJob', type: 'string' },
+      { internalType: 'string', name: 'materialTitle', type: 'string' },
       { internalType: 'string', name: 'purpose', type: 'string' },
-      { internalType: 'string', name: 'description', type: 'string' },
+      { internalType: 'string', name: 'urlSource', type: 'string' },
       { internalType: 'uint256', name: 'value', type: 'uint256' },
-      { internalType: 'address', name: 'claimer', type: 'address' },
-      { internalType: 'address', name: 'recipient', type: 'address' },
+      {
+        internalType: 'address',
+        name: 'claimerAddress',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: 'recipientAddress',
+        type: 'address',
+      },
       { internalType: 'bool', name: 'done', type: 'bool' },
       {
         internalType: 'uint256',
@@ -83,9 +78,11 @@ const abi = [
   },
   {
     inputs: [
-      { internalType: 'string', name: 'nickName', type: 'string' },
-      { internalType: 'uint256', name: 'latitude', type: 'uint256' },
-      { internalType: 'uint256', name: 'longitude', type: 'uint256' },
+      {
+        internalType: 'string',
+        name: 'contributorName',
+        type: 'string',
+      },
     ],
     name: 'contribute',
     outputs: [],
@@ -93,16 +90,22 @@ const abi = [
     type: 'function',
     constant: undefined,
     payable: true,
-    signature: '0x64f745a7',
+    signature: '0x5c43217b',
   },
   {
     inputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
     name: 'contributors',
     outputs: [
-      { internalType: 'string', name: 'nickName', type: 'string' },
-      { internalType: 'address', name: 'place', type: 'address' },
-      { internalType: 'uint256', name: 'latitude', type: 'uint256' },
-      { internalType: 'uint256', name: 'longitude', type: 'uint256' },
+      {
+        internalType: 'string',
+        name: 'contributorName',
+        type: 'string',
+      },
+      {
+        internalType: 'address',
+        name: 'contributorAddress',
+        type: 'address',
+      },
     ],
     stateMutability: 'view',
     type: 'function',
@@ -116,20 +119,18 @@ const abi = [
     outputs: [
       {
         components: [
-          { internalType: 'string', name: 'nickName', type: 'string' },
-          { internalType: 'address', name: 'place', type: 'address' },
           {
-            internalType: 'uint256',
-            name: 'latitude',
-            type: 'uint256',
+            internalType: 'string',
+            name: 'contributorName',
+            type: 'string',
           },
           {
-            internalType: 'uint256',
-            name: 'longitude',
-            type: 'uint256',
+            internalType: 'address',
+            name: 'contributorAddress',
+            type: 'address',
           },
         ],
-        internalType: 'struct Appetito.ContibutorType[]',
+        internalType: 'struct Appetito.ContributorType[]',
         name: '',
         type: 'tuple[]',
       },
@@ -142,13 +143,50 @@ const abi = [
   },
   {
     inputs: [],
-    name: 'getContributorsNum',
-    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    name: 'getMessages',
+    outputs: [
+      {
+        components: [
+          { internalType: 'address', name: 'sender', type: 'address' },
+          {
+            internalType: 'string',
+            name: 'description',
+            type: 'string',
+          },
+        ],
+        internalType: 'struct Appetito.MessageType[]',
+        name: '',
+        type: 'tuple[]',
+      },
+    ],
     stateMutability: 'view',
     type: 'function',
     constant: true,
     payable: undefined,
-    signature: '0x39e77905',
+    signature: '0x5ff6cbf3',
+  },
+  {
+    inputs: [{ internalType: 'string', name: 'description', type: 'string' }],
+    name: 'makeMessage',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+    constant: undefined,
+    payable: undefined,
+    signature: '0x14d5b247',
+  },
+  {
+    inputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    name: 'messages',
+    outputs: [
+      { internalType: 'address', name: 'sender', type: 'address' },
+      { internalType: 'string', name: 'description', type: 'string' },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+    constant: true,
+    payable: undefined,
+    signature: '0x0d80fefd',
   },
   {
     inputs: [],
@@ -182,7 +220,7 @@ const abi = [
   },
 ];
 
-const address = '0xedA47Bb14473820Deaa20c15d2Caa57c7a73e08D';
+const address = '0x63A7688AAa7D2f0F3e7fe4f811b33AE49ce8D4Aa';
 
 export default new web3.eth.Contract(abi, address);
-// export default appetitoInstanceCopy;
+// export default new web3.eth.Contract(deployedInfo.compiledAbiForReact, deployedInfo.contractAddressForReact);

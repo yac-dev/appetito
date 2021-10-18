@@ -50,7 +50,7 @@ contract Appetito {
   }
 
   function contribute(string memory contributorName) public payable addList(){
-    require(msg.value >= 0.01 ether);
+    require(msg.value >= 0.0000000000000001 ether);
     ContributorType memory contributor = ContributorType({
       contributorName: contributorName,
       contributorAddress: msg.sender

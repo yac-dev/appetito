@@ -5,21 +5,24 @@ import './App.css';
 import appetito from './appetito';
 
 //components
+import LandingPage from './components/LandingPage';
 import Contibute from './components/Contibute';
-import Map from './components/Map';
+import Claim from './components/Claim';
 
 class App extends React.Component {
-  async componentDidMount() {
-    const owner = await appetito.methods.owner().call();
-    console.log(owner);
-  }
+  // async componentDidMount() {
+  //   const owner = await appetito.methods.owner().call();
+  //   console.log(owner);
+  // }
 
   render() {
     return (
-      <div>
+      <div className='ui container'>
         <Router>
-          <Route path='/' exact component={Map} />
+          {/* <Route path='/' exact component={Map} /> */}
+          <Route path='/' exact component={LandingPage} />
           <Route path='/ether/contribute' exact component={Contibute} />
+          <Route path='/ether/claim' exact component={Claim} />
         </Router>
       </div>
     );

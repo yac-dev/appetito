@@ -27,8 +27,8 @@ const abi = [
       { internalType: 'string', name: 'dreamJob', type: 'string' },
       { internalType: 'string', name: 'materialTitle', type: 'string' },
       { internalType: 'string', name: 'urlSource', type: 'string' },
-      { internalType: 'string', name: 'purpose', type: 'string' },
-      { internalType: 'uint256', name: 'value', type: 'uint256' },
+      { internalType: 'string', name: 'description', type: 'string' },
+      { internalType: 'uint256', name: 'amount', type: 'uint256' },
       {
         internalType: 'address',
         name: 'recipientAddress',
@@ -50,9 +50,9 @@ const abi = [
       { internalType: 'string', name: 'claimerName', type: 'string' },
       { internalType: 'string', name: 'dreamJob', type: 'string' },
       { internalType: 'string', name: 'materialTitle', type: 'string' },
-      { internalType: 'string', name: 'purpose', type: 'string' },
+      { internalType: 'string', name: 'description', type: 'string' },
       { internalType: 'string', name: 'urlSource', type: 'string' },
-      { internalType: 'uint256', name: 'value', type: 'uint256' },
+      { internalType: 'uint256', name: 'amount', type: 'uint256' },
       {
         internalType: 'address',
         name: 'claimerAddress',
@@ -115,6 +115,16 @@ const abi = [
   },
   {
     inputs: [],
+    name: 'getClaimsCount',
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+    constant: true,
+    payable: undefined,
+    signature: '0x3ef8f2ba',
+  },
+  {
+    inputs: [],
     name: 'getContributors',
     outputs: [
       {
@@ -164,6 +174,16 @@ const abi = [
     constant: true,
     payable: undefined,
     signature: '0x5ff6cbf3',
+  },
+  {
+    inputs: [],
+    name: 'getMessagesCount',
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+    constant: true,
+    payable: undefined,
+    signature: '0x3d0c46d0',
   },
   {
     inputs: [{ internalType: 'string', name: 'description', type: 'string' }],
@@ -220,7 +240,7 @@ const abi = [
   },
 ];
 
-const address = '0x63A7688AAa7D2f0F3e7fe4f811b33AE49ce8D4Aa';
+const address = '0x796Ded0f529B409ea558c12Ec522cD905a1a1f57';
 
 export default new web3.eth.Contract(abi, address);
 // export default new web3.eth.Contract(deployedInfo.compiledAbiForReact, deployedInfo.contractAddressForReact);

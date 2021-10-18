@@ -6,9 +6,9 @@ contract Appetito {
     string claimerName;
     string dreamJob;
     string materialTitle;
-    string purpose;
+    string description;
     string urlSource;
-    uint value;
+    uint amount;
     address claimerAddress;
     address recipientAddress;
     bool done;
@@ -76,7 +76,7 @@ contract Appetito {
   }
 
 
-  function claim(string memory claimerName ,string memory dreamJob, string memory materialTitle, string memory urlSource, string memory purpose, uint value, address recipientAddress) public addList(){
+  function claim(string memory claimerName ,string memory dreamJob, string memory materialTitle, string memory urlSource, string memory description, uint amount, address recipientAddress) public addList(){
     require(msg.sender != recipientAddress); // 自分で自分に送れちゃあだめだ。
     uint index = claims.length;
     claims.push();
@@ -86,8 +86,8 @@ contract Appetito {
     claim.dreamJob = dreamJob;
     claim.materialTitle = materialTitle;
     claim.urlSource = urlSource;
-    claim.purpose = purpose;
-    claim.value = value;
+    claim.description = description;
+    claim.amount = amount;
     claim.claimerAddress = msg.sender;
     claim.recipientAddress = recipientAddress;
     claim.done = false;
@@ -126,6 +126,10 @@ contract Appetito {
     // }
   }
 
+  function getClaimsCount() public view returns(uint){
+    return claims.length;
+  }
+
   function startStudy(uint index) public payable {
     ClaimType storage claim = claims[index];
 
@@ -134,7 +138,7 @@ contract Appetito {
     require(!claim.done);
     claim.done = true;
 
-    payable (claim.recipientAddress).transfer(claim.value); // wei baseであることに注意。
+    payable (claim.recipientAddress).transfer(claim.amount); // wei baseであることに注意。
   }
 
   function makeMessage(string memory description) public {
@@ -149,4 +153,9 @@ contract Appetito {
   function getMessages() public view returns(MessageType[] memory){
     return messages;
   }
+
+  function getMessagesCount() public view returns(uint){
+    return messages.length;
+  }
+
 }

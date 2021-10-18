@@ -17,7 +17,7 @@ const deploy = async () => {
 
     const result = await new web3.eth.Contract(compiledAppetito.abi)
       .deploy({ data: '0x' + compiledAppetito.evm.bytecode.object })
-      .send({ gas: '5000000', gasPrice: '5000000000', from: accounts[0] });
+      .send({ gas: '5000000', gasPrice: '1000000000', from: accounts[0] });
 
     console.dir(compiledAppetito.abi, { depth: null });
     compiledAbiForReact = compiledAppetito.abi;
@@ -40,3 +40,4 @@ module.exports = { compiledAbiForReact, contractAddressForReact };
 // 5th 0xedA47Bb14473820Deaa20c15d2Caa57c7a73e08D
 // 6th 0xfb7946459548939eA5C950c66517289a9EABfc8f
 // 7 0x63A7688AAa7D2f0F3e7fe4f811b33AE49ce8D4Aa
+// 8 0x796Ded0f529B409ea558c12Ec522cD905a1a1f57

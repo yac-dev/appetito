@@ -23,6 +23,7 @@ const input = {
     },
   },
 };
+
 const output = JSON.parse(solc.compile(JSON.stringify(input))).contracts['Appetito.sol']; // これで、interfaceは取れているのかね？bytecodeは見つかるけど。→abiはある。
 
 // const output = solc.compile(source, 1).contracts[':Appetito']; // :Apetito この書き方、古いな。

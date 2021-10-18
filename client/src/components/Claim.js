@@ -1,30 +1,34 @@
 import React from 'react';
 import appetito from '../appetito';
+import web3 from '../web3';
 
 class Claim extends React.Component {
   state = {
+    pendingMessage: '',
     claimerName: '',
     dreamJob: '',
     materialTitle: '',
     urlSource: '',
     purpose: '',
-    amount: '',
+    value: '',
     recipientAddress: '',
   };
 
-  onFormSubmit = (event) => {
+  onFormSubmit = async (event) => {
     event.preventDefault();
+    const accounts = await web3.eth.getAccounts();
+    const { claimerName, dreamJob, materialTitle, urlSource, purpose, value, recipientAddress } = this.state;
+    this.setState({ pendingMessage: 'Processing your claim. Generally, it takes 15 sec.' });
 
-    const formValues = {
-      claimerName: this.state.claimerName,
-      dreamJob: this.state.dreamJob,
-      materialTitle: this.state.materialTitle,
-      urlSource: this.state.urlSource,
-      purpose: this.state.purpose,
-      value: this.state.value,
-      recipientAddress: this.state.recipientAddress,
-    };
-    console.log(formValues);
+    try {
+      await appetito.methods
+        .claim(claimerName, dreamJob, materialTitle, urlSource, purpose, value, recipientAddress)
+        .send({ from: accounts[0] });
+
+      this.setState({ pendingMessage: 'Your claim processed successfully.' });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   render() {
@@ -60,7 +64,7 @@ class Claim extends React.Component {
             placeholder='Please paste url of the material as a proof'
           />
 
-          <label>Description</label>
+          <label>Purpose</label>
           <textarea
             value={this.state.purpose}
             onChange={(event) => this.setState({ purpose: event.target.value })}
@@ -71,7 +75,7 @@ class Claim extends React.Component {
 
           <label>Amount</label>
           <input
-            value={this.state.amount}
+            value={this.state.value}
             onChange={(event) => this.setState({ value: event.target.value })}
             placeholder='How much you need?'
           />
@@ -84,6 +88,8 @@ class Claim extends React.Component {
           />
           <button>Claim!</button>
         </form>
+        <hr />
+        <div>{this.state.pendingMessage}</div>
       </div>
     );
   }

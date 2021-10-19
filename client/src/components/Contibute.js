@@ -8,7 +8,7 @@ class Contibute extends React.Component {
   onFormSubmit = async (event) => {
     event.preventDefault();
     const accounts = await web3.eth.getAccounts(); // accountsっていうか、結局一つのaccountのみを取ってくれるようになっている。
-    this.setState({ pendingMessage: 'Please wait till your contribution succeed. Generally, it takes 15 sec.' });
+    this.setState({ pendingMessage: 'Processing your contribution. Generally, it takes 15 sec.' });
 
     await appetito.methods.contribute(this.state.nickname).send({
       from: accounts[0],

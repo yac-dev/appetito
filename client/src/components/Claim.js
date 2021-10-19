@@ -25,7 +25,7 @@ class Claim extends React.Component {
         .claim(claimerName, dreamJob, materialTitle, urlSource, purpose, value, recipientAddress)
         .send({ from: accounts[0] });
 
-      this.setState({ pendingMessage: 'Your claim processed successfully.' });
+      this.setState({ pendingMessage: 'Your claim is processed successfully!' });
     } catch (error) {
       console.log(error);
     }

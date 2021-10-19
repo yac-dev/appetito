@@ -8,10 +8,10 @@ class NavAnchor extends React.Component {
     this.state = { isOpen: false };
   }
 
-  onAnchorClick = () => {
-    this.setState({ isOpen: false });
-    this.setState({ isOpen: true });
-  };
+  // onAnchorClick = () => {
+  //   this.setState({ isOpen: false });
+  //   this.setState({ isOpen: true });
+  // };
 
   render() {
     console.log(window.location.href);
@@ -19,6 +19,7 @@ class NavAnchor extends React.Component {
       <div onClick={this.onAnchorClick}>
         <Link to={this.props.to} className={`${this.state.isOpen ? 'active' : ''} item `}>
           {this.props.tagName}
+          <i className={`${this.props.icon} icon`}></i>
         </Link>
       </div>
     );

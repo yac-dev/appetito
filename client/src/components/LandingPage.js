@@ -23,6 +23,8 @@ class LandingPage extends React.Component {
         <div>
           <Link to={'/ether/contribute'}>You wanna contribute for passions?</Link>
         </div>
+        <p>owned by {this.props.owner}</p>
+        <p>This smart contract exists on 0x796Ded0f529B409ea558c12Ec522cD905a1a1f57</p>
       </div>
     );
   }

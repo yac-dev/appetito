@@ -15,13 +15,14 @@ import Claim from './components/Claim';
 import ClaimList from './components/ClaimList';
 
 class App extends React.Component {
-  state = { contractBalance: null, contributorsNumber: null, population: null };
+  state = { contractBalance: null, contributorsNumber: null, population: null, owner: null };
 
   async componentDidMount() {
+    const owner = await appetito.methods.owner().call();
     const contractBalance = await web3.eth.getBalance(appetito.options.address);
     const contributors = await appetito.methods.getContributors().call();
     const population = await appetito.methods.population().call();
-    this.setState({ contractBalance, contributorsNumber: contributors.length, population });
+    this.setState({ contractBalance, contributorsNumber: contributors.length, population, owner });
   }
 
   render() {
@@ -37,6 +38,7 @@ class App extends React.Component {
               contractBalance={this.state.contractBalance}
               contributorsNumber={this.state.contributorsNumber}
               population={this.state.population}
+              owner={this.state.owner}
             />
           </Route>
           <Route path='/ether/contribute' exact component={Contibute} />

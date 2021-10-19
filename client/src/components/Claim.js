@@ -86,7 +86,7 @@ class Claim extends React.Component {
             onChange={(event) => this.setState({ recipientAddress: event.target.value })}
             placeholder='Where we send to?'
           />
-          <button>Claim!</button>
+          <button class='ui button'>Claim!</button>
         </form>
         <hr />
         <div>{this.state.pendingMessage}</div>

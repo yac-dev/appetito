@@ -59,58 +59,80 @@ class ClaimCard extends React.Component {
     return (
       <div className='ui card'>
         <div className='content'>
-          <div className='header'>{this.props.claim.claimerName}</div>
+          <div className='header'>Claimer Name: {this.props.claim.claimerName}</div>
         </div>
         <div className='content'>
-          <div className='ui header'>Dream Job: {this.props.claim.dreamJob}</div>
-          <div className='ui small feed'>
-            <div className='event'>
-              <div className='content'>
-                <div className='summary'>Material: {this.props.claim.materialTitle}</div>
-              </div>
-            </div>
+          {/* <div className='ui header'>Dream Job: {this.props.claim.dreamJob}</div>
+          <div className='ui small feed'> */}
 
-            <div className='event'>
-              <div className='content'>
-                <div className='summary'>Source: {this.props.claim.urlSource}</div>
-              </div>
-            </div>
-
-            <div className='event'>
-              <div className='content'>
-                <div className='summary'>Description: {this.props.claim.description}</div>
-              </div>
-            </div>
-
-            <div className='event'>
-              <div className='content'>
-                <div className='summary'>Amount: {this.props.claim.amount}</div>
-              </div>
-            </div>
-
-            <div className='event'>
-              <div className='content'>
-                <div className='summary'>Claimer Address: {this.props.claim.claimerAddress}</div>
-              </div>
-            </div>
-
-            <div className='event'>
-              <div className='content'>
-                <div className='summary'>Recipient Address: {this.props.claim.recipientAddress}</div>
-              </div>
-            </div>
-
-            <div className='event'>
-              <div className='content'>
-                <div className='summary'>
-                  Status: {this.props.claim.done ? 'Yes' : 'No'} {this.props.claim.approvedCounts}/
-                  {this.props.population}
-                </div>
+          <div className='event'>
+            <div className='content'>
+              <div className='summary'>
+                <i className='child icon'></i>Dream Job: {this.props.claim.dreamJob}
               </div>
             </div>
           </div>
+          <div className='event'>
+            <div className='content'>
+              <div className='summary'>
+                <i className='book icon'></i>Material: {this.props.claim.materialTitle}
+              </div>
+            </div>
+          </div>
+
+          <div className='event'>
+            <div className='content'>
+              <div className='summary'>
+                <i className='search icon'></i>Source: {this.props.claim.urlSource}
+              </div>
+            </div>
+          </div>
+
+          <div className='event'>
+            <div className='content'>
+              <div className='summary'>
+                <i className='edit icon'></i>Description: {this.props.claim.description}
+              </div>
+            </div>
+          </div>
+
+          <div className='event'>
+            <div className='content'>
+              <div className='summary'>
+                <i className='ethereum icon'></i>Amount: {this.props.claim.amount} wei
+              </div>
+            </div>
+          </div>
+
+          <div className='event'>
+            <div className='content'>
+              <div className='summary'>
+                <i className='share icon'></i>Claimer Address: {this.props.claim.claimerAddress}
+              </div>
+            </div>
+          </div>
+
+          <div className='event'>
+            <div className='content'>
+              <div className='summary'>
+                <i className='reply icon'></i>Recipient Address: {this.props.claim.recipientAddress}
+              </div>
+            </div>
+          </div>
+
+          <div className='event'>
+            <div className='content'>
+              <div className='summary'>
+                <i className='handshake icon'></i>Status: {this.props.claim.done ? 'Yes' : 'No'}{' '}
+                {this.props.claim.approvedCounts}/{this.props.population}
+              </div>
+            </div>
+          </div>
+          {/* </div> */}
         </div>
         {this.renderButton(this.props.claim.claimerAddress)}
+        <hr />
+        <div>{this.state.pendingMessage}</div>
       </div>
     );
   }

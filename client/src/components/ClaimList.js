@@ -9,19 +9,19 @@ class ClaimList extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { claims: '' };
+    this.state = { claims: '', pendingMessage: '' };
   }
 
   async componentDidMount() {
     const claimsCount = await appetito.methods.getClaimsCount().call();
-    // console.log(claimsCount);
+    console.log(claimsCount);
+    // ここ動いてないなーちゃんと。
     const claims = await Promise.all(
-      Array(claimsCount)
-        .fill()
-        .map((element, index) => {
-          return appetito.methods.claims(index).call();
-        })
+      new Array(claimsCount).fill().map((element, index) => {
+        return appetito.methods.claims(index).call();
+      })
     );
+    console.log(claims);
     this.setState({ claims });
   }
 
@@ -29,13 +29,22 @@ class ClaimList extends React.Component {
     if (!this.state.claims) {
       return null;
     } else {
-      console.log(this.state.claims);
       const lists = this.state.claims.map((claim, index) => {
-        return <ClaimCard claim={claim} index={index} population={this.props.population} />;
+        return (
+          <ClaimCard
+            claim={claim}
+            index={index}
+            population={this.props.population}
+            pendingMessage={this.state.pendingMessage}
+          />
+        );
       });
+      console.log(this.state.claims);
       return (
         <div>
-          <div>{lists}</div>
+          <div className='ui cards'>{lists}</div>
+          <hr />
+          <div>{this.state.pendingMessage}</div>
         </div>
       );
     }

@@ -41,7 +41,7 @@ class Contibute extends React.Component {
               placeholder='Required at least 100 wei'
             />
           </div>
-          <button>Contribute!</button>
+          <button class='ui button'>Contribute!</button>
         </form>
         <div>{this.state.pendingMessage}</div>
       </div>

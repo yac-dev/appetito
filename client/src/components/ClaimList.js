@@ -17,10 +17,11 @@ class ClaimList extends React.Component {
     console.log(claimsCount);
     // ここ動いてないなーちゃんと。
     const claims = await Promise.all(
-      new Array(claimsCount).fill().map((element, index) => {
+      new Array(parseInt(claimsCount)).fill().map((element, index) => {
         return appetito.methods.claims(index).call();
       })
     );
+    // const claims = new Array(claimsCount).fill();
     console.log(claims);
     this.setState({ claims });
   }

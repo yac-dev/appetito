@@ -10,7 +10,6 @@ let appetito;
 
 beforeEach(async () => {
   accounts = await web3.eth.getAccounts();
-
   appetito = await new web3.eth.Contract(compiledAppetito.abi) // JSON.parseはいらないのか。
     .deploy({
       data: compiledAppetito.evm.bytecode.object,
@@ -19,14 +18,14 @@ beforeEach(async () => {
 });
 
 describe('Appetito test!', () => {
-  it('deploys an appetito contract on ethereum network!', async () => {
+  it('deploys an appetito contract on ganache network!', async () => {
     assert.ok(appetito.options.address);
   });
 
-  it('marks yosuke as an owner', async () => {
+  it('marks creator as an owner', async () => {
     const owner = await appetito.methods.owner().call();
     assert.equal(owner, accounts[0]);
   });
 
-  it('allows everybody to donate ether money and marks them', () => {});
+  it('allows everybody to contribute ether and marks them', async () => {});
 });

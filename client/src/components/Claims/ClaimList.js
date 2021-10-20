@@ -1,5 +1,5 @@
 import React from 'react';
-import appetito from '../appetito';
+import appetito from '../../appetito';
 // import web3 from '../web3';
 
 // modules
@@ -14,8 +14,10 @@ class ClaimList extends React.Component {
 
   async componentDidMount() {
     const claimsCount = await appetito.methods.getClaimsCount().call();
-    console.log(claimsCount);
-    // ここ動いてないなーちゃんと。
+    console.log(typeof claimsCount);
+    console.log(parseInt(claimsCount));
+    // このnumberだと思っていたらstringであるパターン、分からないとドツボにハマるな。
+    // 確か前にもnumberがちゃんと動かなかった時あったな。そういえば。気をつけよう。
     const claims = await Promise.all(
       new Array(parseInt(claimsCount)).fill().map((element, index) => {
         return appetito.methods.claims(index).call();

@@ -1,30 +1,45 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import web3 from '../web3';
-import appetito from '../appetito';
 
 class LandingPage extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
-      <div>
-        <h1>Welcome to Appetito!</h1>
-        <h2>
-          {this.props.population} people, {this.props.contractBalance} wei in this network and{' '}
-          {this.props.contributorsNumber} helpful contributors!
-        </h2>
+      <div className='landing-header'>
+        <h1>
+          Welcome to Appetito.p2p!!<i className='ethereum icon'></i>
+        </h1>
+        <h2>Status</h2>
+        <table class='ui blue table'>
+          <thead>
+            <tr>
+              <th>Contract Balance</th>
+              <th>Contract Address</th>
+              <th>Network Population</th>
+              <th>Contributors</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{this.props.contractBalance} wei</td>
+              <td>0x796Ded0f529B409ea558c12Ec522cD905a1a1f57</td>
+              <td>{this.props.population} people</td>
+              <td>{this.props.contributorsNumber} people</td>
+            </tr>
+          </tbody>
+        </table>
+
         <div>
-          <Link to={'/ether/claim'}>Are you passionate about somthing?</Link>
-        </div>
-        <p>or</p>
-        <div>
+          <Link to={'/ether/claim'}>Are you passionate about somthing?</Link> or{' '}
           <Link to={'/ether/contribute'}>You wanna contribute for passions?</Link>
         </div>
-        <p>owned by {this.props.owner}</p>
-        <p>This smart contract exists on 0x796Ded0f529B409ea558c12Ec522cD905a1a1f57</p>
+
+        <div className='footer'>
+          {' '}
+          <div className='inside'>
+            <hr />
+            <p>created by {this.props.owner}</p>
+          </div>
+        </div>
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React from 'react';
-import appetito from '../appetito';
-import web3 from '../web3';
+import appetito from '../../appetito';
+import web3 from '../../web3';
 
 class Claim extends React.Component {
   state = {
@@ -54,7 +54,7 @@ class Claim extends React.Component {
           <input
             value={this.state.materialTitle}
             onChange={(event) => this.setState({ materialTitle: event.target.value })}
-            placeholder='What you need?'
+            placeholder='What you need for getting the job?'
           />
 
           <label>Material's URL</label>
@@ -68,7 +68,7 @@ class Claim extends React.Component {
           <textarea
             value={this.state.purpose}
             onChange={(event) => this.setState({ purpose: event.target.value })}
-            placeholder='Describe some details, why you wanna be the job, why you need the materilas etc'
+            placeholder='Describe some details, why you wanna get the job, why you need the materilas etc'
             cols={50}
             rows={5}
           />

@@ -7,3 +7,21 @@ input {
   grid-template-columns: repeat(2, 1fr);
   column-gap: 5px;
 }
+
+.event {
+  margin-bottom: 20px !important;
+}
+
+.landing-header > h1 {
+  text-align: center;
+}
+
+.inside {
+  position: absolute;
+  bottom: 0;
+  height: 60px;
+}
+
+.inside > p {
+  text-align: center;
+}

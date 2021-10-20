@@ -1,8 +1,9 @@
 import React from 'react';
 import './card.css';
+import { Link } from 'react-router-dom';
 
-import appetito from '../appetito';
-import web3 from '../web3';
+import appetito from '../../appetito';
+import web3 from '../../web3';
 
 class ClaimCard extends React.Component {
   constructor(props) {
@@ -83,7 +84,15 @@ class ClaimCard extends React.Component {
           <div className='event'>
             <div className='content'>
               <div className='summary'>
-                <i className='search icon'></i>Source: {this.props.claim.urlSource}
+                <i className='search icon'></i>Source:{' '}
+                <a
+                  style={{ display: 'table-cell' }}
+                  href={this.props.claim.urlSource}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  {this.props.claim.urlSource}
+                </a>
               </div>
             </div>
           </div>
@@ -107,7 +116,15 @@ class ClaimCard extends React.Component {
           <div className='event'>
             <div className='content'>
               <div className='summary'>
-                <i className='share icon'></i>Claimer Address: {this.props.claim.claimerAddress}
+                <i className='home icon'></i>Claimer Address:{' '}
+                <a
+                  style={{ display: 'table-cell' }}
+                  href={`https://rinkeby.etherscan.io/address/${this.props.claim.claimerAddress}`}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  {this.props.claim.claimerAddress}
+                </a>
               </div>
             </div>
           </div>
@@ -115,7 +132,15 @@ class ClaimCard extends React.Component {
           <div className='event'>
             <div className='content'>
               <div className='summary'>
-                <i className='reply icon'></i>Recipient Address: {this.props.claim.recipientAddress}
+                <i className='home icon'></i>Recipient Address:{' '}
+                <a
+                  style={{ display: 'table-cell' }}
+                  href={`https://rinkeby.etherscan.io/address/${this.props.claim.recipientAddress}`}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  {this.props.claim.recipientAddress}
+                </a>
               </div>
             </div>
           </div>

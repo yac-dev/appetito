@@ -8,11 +8,11 @@ import appetito from './appetito';
 import web3 from './web3';
 
 //components
-import Navbar from './components/Navbar';
+import Navbar from './components/Navigators/Navbar';
 import LandingPage from './components/LandingPage';
 import Contibute from './components/Contibute';
-import Claim from './components/Claim';
-import ClaimList from './components/ClaimList';
+import Claim from './components/Claims/Claim';
+import ClaimList from './components/Claims/ClaimList';
 
 class App extends React.Component {
   state = { contractBalance: null, contributorsNumber: null, population: null, owner: null };

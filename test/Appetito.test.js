@@ -52,6 +52,36 @@ describe('Appetito test!', () => {
     assert.equal(population, 2); // contract creatorとccontributor
   });
 
+  it('does not allow people to contribute with less than 100 wei', async () => {
+    try {
+      await appetito.methods.contribute('myname').send({
+        value: '99',
+        from: accounts[1],
+        gas: '5000000',
+        gasPrice: '30000000',
+      });
+    } catch (error) {
+      // assert.strictEqual(error.results.accounts[1].error === 'revert');
+      assert(error);
+      return;
+    }
+    assert(false); // test fails
+  });
+
+  it('does not allow people to claim with insufficient input', async () => {
+    try {
+      await appetito.methods.claim('John', 'Analyst', 'Wanna study analysis', 1000, accounts[2]).send({
+        from: accounts[1],
+        gas: '5000000',
+        gasPrice: '30000000',
+      });
+    } catch (error) {
+      assert(error);
+      return;
+    }
+    assert(false); // test fails
+  });
+
   it('allows people to claim and approve it', async () => {
     await appetito.methods
       .claim('Bob', 'Software Engineer', 'Book', 'https://abc.com', 'Wanna study!', 10, accounts[2])
@@ -93,7 +123,8 @@ describe('Appetito test!', () => {
     let afterStartStudyBalance = await web3.eth.getBalance(accounts[2]);
     afterStartStudyBalance = parseInt(afterStartStudyBalance);
     // console.log(beforeStartStudyBalance);
-    console.log(afterStartStudyBalance);
+
+    // console.log(afterStartStudyBalance);
     // assert.ok(afterStartStudyBalance - beforeStartStudyBalance > 0); // ?????
   });
 });
